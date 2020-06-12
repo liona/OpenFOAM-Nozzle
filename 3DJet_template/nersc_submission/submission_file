@@ -1,0 +1,15 @@
+#!/bin/bash
+#SBATCH --image=docker:openfoamplus/of_v1706_centos73:latest
+#SBATCH --nodes=1
+#SBATCH --partition=regular
+#SBATCH --time=08:00:00
+#SBATCH -C haswell
+
+# Go into the proper folder
+cd $SCRATCH/openfoam/3000
+
+# Erase previous simulation results
+shifter /bin/bash -c "source /opt/OpenFOAM/setImage_v1706.sh && ./Allclean"
+
+# Run the simulation
+shifter /bin/bash -c "source /opt/OpenFOAM/setImage_v1706.sh && ./Allrun"
