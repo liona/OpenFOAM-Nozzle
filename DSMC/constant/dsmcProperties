@@ -1,0 +1,83 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  plus                                  |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      dsmcProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+
+// General Properties
+// ~~~~~~~~~~~~~~~~~~
+
+nEquivalentParticles            2e7; //5e12;
+
+
+// Wall Interaction Model
+// ~~~~~~~~~~~~~~~~~~~~~~
+
+WallInteractionModel            MaxwellianThermal;
+
+
+// Binary Collision Model
+// ~~~~~~~~~~~~~~~~~~~~~~
+
+BinaryCollisionModel            LarsenBorgnakkeVariableHardSphere;
+
+LarsenBorgnakkeVariableHardSphereCoeffs
+{
+    Tref                        273;
+    relaxationCollisionNumber   5.0;
+}
+
+
+// Inflow Boundary Model
+// ~~~~~~~~~~~~~~~~~~~~~
+
+InflowBoundaryModel             FreeStream;
+
+FreeStreamCoeffs
+{
+    numberDensities
+    {
+        N2      	5e25;			//N2	  0.777e28;
+									//O2      0.223e28;
+    };
+}
+
+
+// Molecular species
+// ~~~~~~~~~~~~~~~~~
+
+typeIdList                      (N2 O2);
+
+moleculeProperties
+{
+    N2
+    {
+        mass                            46.5e-27; //kg per molecule
+        diameter                        4.17e-10; //meters.  Others say 3.64e-10
+        internalDegreesOfFreedom        2;
+        omega                           0.74;
+    }
+
+    O2
+    {
+        mass                            53.12e-27;
+        diameter                        4.07e-10;
+        internalDegreesOfFreedom        2;
+        omega                           0.77;
+    }
+}
+
+
+// ************************************************************************* //
